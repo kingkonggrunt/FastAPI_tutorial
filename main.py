@@ -21,7 +21,7 @@ def print_root():
 def product_index():
     return products
 
-@app.get("/products/search")  # placing this below ("products/{id}") will have search requests send to that instead
+@app.get("/products/search")
 def product_search(name, response: Response):
     found = [product for product in products if name.lower() in product["name"].lower()]
 
@@ -31,7 +31,7 @@ def product_search(name, response: Response):
 
     return found if len(found) > 1 else found[0]
 
-@app.get("/products/{id}")
+@app.get("/products/{id}")  # place dynamic routes below specific routes
 def product(id: int, response: Response):
     for product in products:
         if product["id"] == id:
