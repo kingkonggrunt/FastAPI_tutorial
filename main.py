@@ -1,5 +1,5 @@
 from fastapi import FastAPI, Response
-
+from src import schemas
 app = FastAPI()
 
 products = [
@@ -22,7 +22,8 @@ def product_index():
     return products
 
 @app.post("/products")
-def create_product(product: dict, response: Response):
+def create_product(new_product: schemas.Product, response: Response):
+    product = new_product.dict()
     product['id'] = len(products) + 1
     products.append(product)
     response.status_code = 201
