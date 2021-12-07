@@ -41,6 +41,18 @@ def edit_product(id: int, edited_product: schemas.Product, response: Response):
             response.status_code = 404
             return "Product Not found"
 
+@app.delete("/products/{id}")
+def destroy_product(id: int, response: Response):
+    for product in products:
+        if product["id"] == id:
+            products.remove(product)
+            response.status_code = 204
+            return product
+
+    response.status_code = 404 
+    return "Product Not found"
+
+
 @app.get("/products/search")
 def product_search(name, response: Response):
     found = [product for product in products if name.lower() in product["name"].lower()]
