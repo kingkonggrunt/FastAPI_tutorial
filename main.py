@@ -30,7 +30,7 @@ def create_product(new_product: schemas.Product, response: Response):
     return product
 
 @app.put("/products/{id}")
-def edit_product(id: int, edited_product: schemas.Product, response.Response):
+def edit_product(id: int, edited_product: schemas.Product, response: Response):
     for product in products:
         if product["id"] == id:
             product['name'] = edited_product.name
