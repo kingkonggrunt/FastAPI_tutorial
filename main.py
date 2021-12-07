@@ -21,6 +21,13 @@ def print_root():
 def product_index():
     return products
 
+@app.post("/products")
+def create_product(product: dict, response: Response):
+    product['id'] = len(products) + 1
+    products.append(product)
+    response.status_code = 201
+    return product
+
 @app.get("/products/search")
 def product_search(name, response: Response):
     found = [product for product in products if name.lower() in product["name"].lower()]
